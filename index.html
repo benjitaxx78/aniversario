@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Aniversario</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; background-color: #000; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
+        
+        /* NAVBAR FIEL AL BOCETO */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 10px; position: absolute; width: 100%; top: 0; z-index: 10; box-sizing: border-box; }
+        .netflix-logo { height: 25px; }
+        .nav-links { display: flex; gap: 12px; font-size: 0.85rem; color: #fff; font-weight: 500; }
+        .nav-icons { display: flex; gap: 15px; align-items: center; font-size: 1.1rem; }
+
+        /* SECCIÓN HERO (PRINCIPAL) */
+        .hero { 
+            position: relative; 
+            height: 90vh; 
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 30px;
+        }
+
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1;
+            /* IMAGEN DE PORTADA (La del ascensor) */
+            background-image: url('1000226243_8c060bfd4af6da63f5333373eb5bc3c9-16_11_2025, 19_31_01.jpg'); 
+            background-size: cover; background-position: center;
+        }
+        
+        .gradient-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, #000 20%, transparent 90%), 
+                        linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content { position: relative; z-index: 2; padding: 20px; text-align: left; max-width: 90%; }
+        
+        /* LOGO "N" PEQUEÑO Y TÍTULO "IANARA Y BENJAMÍN" */
+        .n-small { width: 15px; margin-bottom: 5px; }
+        .main-title-img { width: 85%; max-width: 280px; margin-bottom: 15px; display: block; }
+
+        .metadata { 
+            font-size: 0.8rem; margin-bottom: 12px; display: flex; 
+            align-items: center; justify-content: flex-start; gap: 10px;
+        }
+        .top-10 { width: 22px; }
+
+        .description { 
+            font-size: 0.95rem; line-height: 1.3; margin-bottom: 20px; color: #fff; 
+            font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* BOTONES DE ACCIÓN */
+        .actions { display: flex; align-items: center; gap: 25px; margin-bottom: 5px; }
+        .btn-play { 
+            background: white; color: black; border: none; padding: 8px 20px; 
+            border-radius: 4px; font-weight: bold; display: flex; align-items: center; 
+            gap: 8px; font-size: 1rem; cursor: pointer;
+        }
+        .btn-icon-text { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.7rem; cursor: pointer; }
+        .btn-icon-text i { font-size: 1.3rem; }
+
+        /* CARRUSEL "MI LISTA" - AJUSTADO PARA SER MÁS LARGO */
+        .section-title { padding-left: 15px; margin: 20px 0 10px 0; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;}
+        .carousel { display: flex; overflow-x: auto; padding-left: 15px; gap: 8px; padding-bottom: 30px; scrollbar-width: none; }
+        .carousel::-webkit-scrollbar { display: none; }
+        
+        .card { 
+            min-width: 140px; /* Más ancho */
+            height: 220px;    /* Más alto para completar el largo */
+            background-color: #222; border-radius: 4px; overflow: hidden; position: relative; flex-shrink: 0;
+        }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* MODAL VIDEO */
+        #videoModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 100; align-items: center; justify-content: center; }
+        .close-btn { position: absolute; top: 30px; right: 20px; font-size: 2rem; z-index: 101; cursor: pointer; }
+        iframe { width: 100%; height: 50%; border: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <img src="1000226593_4056bcc6e199c8aa5008a0e8f2776b74-16_11_2025, 23_16_14L.png" class="netflix-logo">
+        <div class="nav-links">
+            <span>Series</span>
+            <span>Películas</span>
+            <span>Mi lista</span>
+        </div>
+        <div class="nav-icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-bell"></i>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-bg"></div> 
+        <div class="gradient-overlay"></div>
+
+        <div class="hero-content">
+            <img src="1000226688_48ec0859a93951284fccc2ecbe11701b-17_11_2025, 1_36_12.png" class="n-small">
+            <img src="1000226436_7409765f0c0a220bef9b88eb1e7d5a10-16_11_2025, 21_25_38.png" class="main-title-img">
+
+            <div class="metadata">
+                <img src="1000226593_4056bcc6e199c8aa5008a0e8f2776b74-16_11_2025, 23_16_14d.png" class="top-10">
+                <span style="font-weight: bold;">27 de febrero</span>
+                <span style="color: #a3a3a3;">1 TEMPORADA</span>
+                <span style="color: white; font-size: 0.6rem;">★★★★★</span>
+            </div>
+
+            <p class="description">
+                Basada en hechos reales benja cuenta y narra un poco de lo que fue todo el primer año que estuvo junto a ianara. Refresca momentos, anecdotas, recuerdos, pensamientos y muchas cosas lindas que benja sintió todo este año.
+            </p>
+
+            <div class="actions">
+                <button class="btn-play" onclick="playVideo('TU_LINK_DE_YOUTUBE_AQUI')">
+                    <i class="fas fa-play"></i> Reproducir
+                </button>
+                <div class="btn-icon-text">
+                    <i class="fas fa-plus"></i>
+                    <span>Mi lista</span>
+                </div>
+                <div class="btn-icon-text">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Información</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">Mi Lista</div>
+    <div class="carousel">
+        <div class="card" onclick="playVideo('LINK_VIDEO_1')">
+            <img src="Diseño sin título.png">
+        </div>
+        <div class="card" onclick="playVideo('LINK_VIDEO_2')">
+            <img src="Diseño sin título (1).png">
+        </div>
+        <div class="card" onclick="playVideo('LINK_VIDEO_3')">
+            <img src="Diseño sin título (3).png">
+        </div>
+        <div class="card" onclick="playVideo('Diseño sin título (2).png')">
+            <img src="Diseño sin título (2).png">
+        </div>
+    </div>
+
+    <div id="videoModal">
+        <div class="close-btn" onclick="closeVideo()">&times;</div>
+        <iframe id="youtubeFrame" src="" allow="autoplay" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function playVideo(url) {
+            if(url.includes('youtube.com')){
+                // Si pasas un link normal, esto intenta convertirlo a formato embed
+                url = url.replace("watch?v=", "embed/") + "?autoplay=1";
+            }
+            document.getElementById('videoModal').style.display = 'flex';
+            document.getElementById('youtubeFrame').src = url;
+        }
+        function closeVideo() {
+            document.getElementById('videoModal').style.display = 'none';
+            document.getElementById('youtubeFrame').src = '';
+        }
+    </script>
+</body>
+</html>
